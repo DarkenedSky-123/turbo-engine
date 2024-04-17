@@ -1,27 +1,25 @@
-name: flask
+name: append_data
 
 on:
-  schedule:
-    - cron: "0 */5 * * *"  # Runs every 5 minutes
-  workflow_dispatch:
-
-env:
-  ACTIONS_ALLOW_UNSECURE_COMMANDS: true  # Not recommended for production
+  # Schedule or workflow dispatch (adjust as needed)
 
 jobs:
   example:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+
       - name: Set up Python
-        uses: actions/setup-python@v2.0.0
+        uses: actions/setup-python@v2
         with:
-          python-version: '3.12.2'
-      - name: Create data.txt (optional)  # Uncomment if needed
-        run: touch ./data.txt  # Creates the file if it doesn't exist
+          python-version: '3.12.2'  # Adjust if necessary
+
       - name: Install requirements
-        run: pip install -r requirements.txt  # Update with your requirements file
-      - name: Run app
-        run: python flaskk.py  # Replace with your actual script name
+        run: pip install -r requirements.txt  # Adjust if using requirements.txt
+
+      - name: Run script to append data
+        run: python flaskk.py  # Replace with your Python script's name
+
+      - name: Optional: View append result (avoid committing)
+        run: cat data.txt  # This step outputs the contents of data.txt for debugging, but doesn't commit it
