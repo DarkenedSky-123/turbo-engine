@@ -1,7 +1,9 @@
-name: append_data
+name: flask
 
 on:
-  # Schedule or workflow dispatch (adjust as needed)
+  schedule:
+    - cron: "0 */5 * * *"  # Run every 5 minutes
+  workflow_dispatch:        # Allow manual triggering
 
 jobs:
   example:
@@ -10,16 +12,19 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Set up Python
+      - name: Set up Python (secure context)
         uses: actions/setup-python@v2
         with:
-          python-version: '3.12.2'  # Adjust if necessary
+          python-version: '3.12.2'
+          cache: 'pip'  # Enable caching for efficiency
 
       - name: Install requirements
-        run: pip install -r requirements.txt  # Adjust if using requirements.txt
+        run: |
+          python -m pip install -r requirements.txt
 
-      - name: Run script to append data
-        run: python flaskk.py  # Replace with your Python script's name
-
-      - name: View append result (avoid committing)
-        run: cat data.txt  # This step outputs the contents of data.txt for debugging, but doesn't commit it
+      - name: Run script to write data (improved security)
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "GitHub Actions"
+          chmod +x flaskk.py  # Make script executable (if needed)
+          python flaskk.py
