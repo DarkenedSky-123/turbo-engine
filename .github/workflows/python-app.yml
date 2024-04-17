@@ -1,25 +1,26 @@
 name: flask
 
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: "0 */5 * * *"
+  workflow_dispatch:
+
+env:
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+
 
 jobs:
-  save_data:
+  example:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v2
-
-      - name: Save data to text file
+      - name: Set up Python
+        uses: actions/setup-python@v2.0.0
+        with:
+          python-version: '3.12.2'
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run app
         run: python flaskk.py
-
-      - name: Commit changes
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add data.txt
-          git commit -m "Save data to text file"
-          git push
