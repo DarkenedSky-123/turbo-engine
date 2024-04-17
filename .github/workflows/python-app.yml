@@ -24,4 +24,4 @@ jobs:
       - name: Install requirements
         run: pip install -r requirements.txt  # Update with your requirements file
       - name: Run app
-        run: python your_script_name.py  # Replace with your actual script name
+        run: python flaskk.py  # Replace with your actual script name
