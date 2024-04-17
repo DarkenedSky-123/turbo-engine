@@ -1,35 +1,29 @@
-name: flaskk
+name: flask
 
 on:
-  schedule:
-    - cron: "0 */5 * * *"  # Runs every 5 minutes (adjust as needed)
+  push:
+    branches:
+      - main
 
 jobs:
-  example:
+  save_data:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo content
-        uses: actions/checkout@v3  # Checkout the repository content
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.8  # Install the specified Python version
+      - name: Save data to text file
+        run: |
+          # Python code to save data to a text file
+          data = "This is the data to be saved to the file."
+          with open("data.txt", "w") as file:
+              file.write(data)
 
-      - name: Install dependencies (efficient)
-        run: pip install -r requirements.txt || true  # Install only if requirements.txt exists
-
-      - name: Execute Python script
-        run: python flaskk.py  # Run your Python script
-
-
-# This section (consider alternative data persistence if needed)
-# - Uncomment and adjust for committing changes
-# - Not recommended for sensitive data or frequent commits
-#      - name: Commit changes (optional)
-#        run: |
-#          git config user.name github-actions
-#          git config user.email github-actions@github.com
-#          git add .
-#          git commit -m "crongenerated"
-#          git push
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data.txt
+          git commit -m "Save data to text file"
+          git push
