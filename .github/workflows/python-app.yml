@@ -2,26 +2,34 @@ name: flaskk
 
 on:
   schedule:
-    - cron: "0 */5 * * *"   #runs at 11:30 UTC everyday
+    - cron: "0 */5 * * *"  # Runs every 5 minutes (adjust as needed)
 
 jobs:
   example:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repo content
-        uses: actions/checkout@v3 # checkout the repository content to github runner.
-      - name: setup python
+      - name: Checkout repo content
+        uses: actions/checkout@v3  # Checkout the repository content
+
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.8 #install the python needed
-      - name: Install dependencies
-        run: |
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - name: execute py script
-        run: |
-          python flaskk.py
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add .
-          git commit -m "crongenerated"
-          git push
+          python-version: 3.8  # Install the specified Python version
+
+      - name: Install dependencies (efficient)
+        run: pip install -r requirements.txt || true  # Install only if requirements.txt exists
+
+      - name: Execute Python script
+        run: python flaskk.py  # Run your Python script
+
+
+# This section (consider alternative data persistence if needed)
+# - Uncomment and adjust for committing changes
+# - Not recommended for sensitive data or frequent commits
+#      - name: Commit changes (optional)
+#        run: |
+#          git config user.name github-actions
+#          git config user.email github-actions@github.com
+#          git add .
+#          git commit -m "crongenerated"
+#          git push
