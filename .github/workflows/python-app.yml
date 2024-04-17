@@ -5,7 +5,7 @@ on:
     - cron: "0 */5 * * *"   #runs at 11:30 UTC everyday
 
 jobs:
-  getdataandrefreshmap:
+  example:
     runs-on: ubuntu-latest
     steps:
       - name: checkout repo content
