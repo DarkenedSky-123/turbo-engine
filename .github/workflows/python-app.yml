@@ -21,5 +21,5 @@ jobs:
       - name: Run script to append data
         run: python flaskk.py  # Replace with your Python script's name
 
-      - name: Optional: View append result (avoid committing)
+      - name: View append result (avoid committing)
         run: cat data.txt  # This step outputs the contents of data.txt for debugging, but doesn't commit it
