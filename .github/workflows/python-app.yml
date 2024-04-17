@@ -15,7 +15,6 @@ jobs:
 
       - name: Save data to text file
         run: |
-          # Python code to save data to a text file
           data = "This is the data to be saved to the file."
           with open("data.txt", "w") as file:
               file.write(data)
