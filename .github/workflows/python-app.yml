@@ -24,3 +24,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run app
         run: python flaskk.py
+      - uses: EndBug/add-and-commit@v9  # You can change this to use a specific version.
+        with:
+          add: ./data.txt  # This specifies the file to be added.
+          message: "Added content to data.txt"  # This sets the commit message.
