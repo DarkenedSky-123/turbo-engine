@@ -37,5 +37,5 @@ jobs:
 
       - name: Run Python Script
         run: |
-          python code/main.py
+          python flaskk.py
 
