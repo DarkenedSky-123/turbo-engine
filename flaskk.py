@@ -1,5 +1,5 @@
 import os
-FILE = 'file.txt'
+FILE = 'data.txt'
 gmail = "armx94522@gmail.com"
 name = "DarkenedSky-123"
 os.system(f"git config --global user.email {gmail}")
