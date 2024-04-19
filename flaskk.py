@@ -1,4 +1,4 @@
-# Open your data.txt file in append mode
-with open("./data.txt", "a") as f:
-    f.write("Hello\n")
-
+import os
+FILE = './file.txt'
+os.system(f'git add {FILE}')
+os.system("git commit -m 'update file'")
