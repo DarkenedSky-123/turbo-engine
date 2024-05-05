@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from moviepy.editor import *
-
+import os
 bot = commands.Bot(command_prefix="/", intents=discord.Intents.all())
 
 @bot.event
@@ -24,4 +24,4 @@ async def hello(interaction: discord.Interaction):
     with open("black_screen.mp4", "rb") as file:
         await interaction.channel.send(file=discord.File(file, filename="black_screen.mp4"))
 
-bot.run('')
+bot.run(os.environ['API_KEY'])
