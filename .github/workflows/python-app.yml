@@ -25,4 +25,4 @@ jobs:
       - name: Test env vars for python
         run: TEST_SECRET=${{ secrets.TOKEN }}
       - name: Run Bot
-        run: python bot.py
+        run: python flaskk.py
